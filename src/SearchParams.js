@@ -1,9 +1,16 @@
 import React, { useState } from "react";
+import { ANIMALS } from "@frontendmasters/pet";
+import useDropdown from "./useDropdown";
 
 const SearchParams = () => {
   // hooks should NEVER go inside if's and for loops
   // useState is a hook; all hooks start with "use"
   const [location, setLocation] = useState("Seattle, WA"); // [variable, changeHandler] = hook(default)
+  // const [animal, setAnimal] = useState("dog");
+  // const [breed, setBreed] = useState("");
+  const [breeds, setBreeds] = useState([]);
+  const [animal, AnimalDropdown] = useDropdown("Animal", "dog", ANIMALS); //Using custom Hook made in useDropdown.js
+  const [breed, BreedDropdown] = useDropdown("Breed", "", breeds);
 
   return (
     <div className="search-params">
@@ -18,6 +25,9 @@ const SearchParams = () => {
             onChange={(event) => setLocation(event.target.value)}
           />
         </label>
+        <AnimalDropdown />
+        <BreedDropdown />
+
         <button>Submit</button>
       </form>
     </div>

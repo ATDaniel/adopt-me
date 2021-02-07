@@ -7,7 +7,7 @@ export default function Pet({ name, animal, breed }) {
   //   React.createElement("h2", {}, breed),
   // ]);
 
-  // What's below this line literally gets translated to what's above
+  // ***** What's below this line literally gets translated to what's above *****
 
   return (
     <div>
