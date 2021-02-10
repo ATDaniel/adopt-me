@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import pet, { ANIMALS } from "@frontendmasters/pet";
 import useDropdown from "./useDropdown";
+import Results from "./Results";
 
 const SearchParams = () => {
   // hooks should NEVER go inside if's and for loops
@@ -9,13 +10,25 @@ const SearchParams = () => {
   const [breeds, setBreeds] = useState([]);
   const [animal, AnimalDropdown] = useDropdown("Animal", "dog", ANIMALS); //Using custom Hook from useDropdown.js
   const [breed, BreedDropdown, setBreed] = useDropdown("Breed", "", breeds);
+  const [pets, setPets] = useState([]);
+
+  async function requestPets() {
+    const { animals } = await pet.animals({
+      // remember, `pet` is an api client
+      location,
+      breed,
+      type: animal,
+    });
+
+    setPets(animals || []);
+  }
 
   useEffect(() => {
     setBreeds([]); // clear Breeds list
     setBreed(""); // clear Breed selected
 
+    //Call pet.breeds() api, then map response
     pet.breeds(animal).then(({ breeds: apiBreeds }) => {
-      //Call pet.breeds() api, then map response
       const breedStrings = apiBreeds.map(({ name }) => name); // map objects to strings
       setBreeds(breedStrings); // Finally, set Breeds list to the list of breed strings.
     }, console.error);
@@ -26,8 +39,12 @@ const SearchParams = () => {
 
   return (
     <div className="search-params">
-      <h1>{location}</h1>
-      <form action="">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          requestPets();
+        }}
+      >
         <label htmlFor="location">
           Location
           <input
@@ -42,6 +59,7 @@ const SearchParams = () => {
 
         <button>Submit</button>
       </form>
+      <Results pets={pets} />
     </div>
   );
 };

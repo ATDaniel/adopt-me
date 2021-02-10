@@ -5,13 +5,15 @@ import SearchParams from "./SearchParams";
 
 const App = () => {
   return (
-    <div>
-      <h1 id="something-important">Adopt Me!</h1>
-      {/* <Pet name="Luna" animal="dog" breed="Havanese" />
+    <React.StrictMode>
+      <div>
+        <h1 id="something-important">Adopt Me!</h1>
+        {/* <Pet name="Luna" animal="dog" breed="Havanese" />
       <Pet name="Winston" animal="Cat" breed="Domestic Shorthair" />
       <Pet name="Pepper" animal="Bird" breed="Cockatiel" /> */}
-      <SearchParams />
-    </div>
+        <SearchParams />
+      </div>
+    </React.StrictMode>
   );
 };
 
