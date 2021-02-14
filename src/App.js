@@ -1,17 +1,21 @@
 import React from "react";
 import { render } from "react-dom";
+import { Link, Router } from "@reach/router";
 // import Pet from "./Pet";
 import SearchParams from "./SearchParams";
+import Details from "./Details";
 
 const App = () => {
   return (
     <React.StrictMode>
       <div>
-        <h1 id="something-important">Adopt Me!</h1>
-        {/* <Pet name="Luna" animal="dog" breed="Havanese" />
-      <Pet name="Winston" animal="Cat" breed="Domestic Shorthair" />
-      <Pet name="Pepper" animal="Bird" breed="Cockatiel" /> */}
-        <SearchParams />
+        <header>
+          <Link to="/">Adopt Me!</Link>
+        </header>
+        <Router>
+          <SearchParams path="/" />
+          <Details path="/details/:id" />
+        </Router>
       </div>
     </React.StrictMode>
   );

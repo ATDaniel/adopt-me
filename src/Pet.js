@@ -1,4 +1,5 @@
 import React from "react";
+import missing_doggo from "../missing_doggo.png";
 
 export default function Pet({ name, animal, breed, media, location, id }) {
   // return React.createElement("div", {}, [
@@ -17,7 +18,8 @@ export default function Pet({ name, animal, breed, media, location, id }) {
   //   </div>
   // );
 
-  let hero = "http://placecorgi.com/300/300";
+  // let hero = "http://placecorgi.com/300/300";
+  let hero = missing_doggo;
 
   if (media.length) {
     hero = media[0].small;
