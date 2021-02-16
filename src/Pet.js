@@ -1,5 +1,5 @@
 import React from "react";
-import missing_doggo from "../missing_doggo.png";
+import missing_doggo from "./assets/missing_doggo.png";
 
 export default function Pet({ name, animal, breed, media, location, id }) {
   // return React.createElement("div", {}, [
