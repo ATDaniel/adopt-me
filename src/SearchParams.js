@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import pet, { ANIMALS } from "@frontendmasters/pet";
 import useDropdown from "./useDropdown";
 import Results from "./Results";
+import ThemeContext from "./ThemeContext";
 
 const SearchParams = () => {
   // hooks should NEVER go inside if's and for loops
@@ -11,6 +12,8 @@ const SearchParams = () => {
   const [animal, AnimalDropdown] = useDropdown("Animal", "dog", ANIMALS); //Using custom Hook from useDropdown.js
   const [breed, BreedDropdown, setBreed] = useDropdown("Breed", "", breeds);
   const [pets, setPets] = useState([]);
+
+  const [theme, setTheme] = useContext(ThemeContext);
 
   async function requestPets() {
     const { animals } = await pet.animals({
@@ -56,8 +59,23 @@ const SearchParams = () => {
         </label>
         <AnimalDropdown />
         <BreedDropdown />
+        <label htmlFor="theme">
+          Theme
+          <select
+            value={theme}
+            onChange={(e) => setTheme(e.target.value)}
+            onBlur={(e) => setTheme(e.target.value)}
+          >
+            <option value="peru">Peru</option>
+            <option value="darkblue">Dark Blue</option>
+            <option value="mediumorchid">Medium Orchid</option>
+            <option value="chartreuse">Chartreuse</option>
+          </select>
+        </label>
 
-        <button>Submit</button>
+        <button style={{ backgroundColor: theme } /*css object inside of js */}>
+          Submit
+        </button>
       </form>
       <Results pets={pets} />
     </div>
